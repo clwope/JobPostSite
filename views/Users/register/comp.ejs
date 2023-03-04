@@ -1,0 +1,31 @@
+<% layout("layouts/boilerplate") %>
+<div class="row">
+  <div class="col-6 ofsset-3 m-auto">
+    <h2 class="display-5 text-primary text-center">İşəgötürənlər Üçün Qeydiyyat</h2>
+    <hr class="text-primary">
+    <form action="/employers" method="post" enctype="multipart/form-data" class="validated-form" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Parol</label>
+        <input type="password" name="password" class="form-control" id="password" minlength="6" placeholder="Minimum 6 simvol" required>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Mövqe</label>
+        <input type="text" name="location" class="form-control" id="location" required>
+      </div>
+      <div class="mb-3">
+        <label for="company Name" class="form-label">Şirkət Adı</label>
+        <input type="text" name="compName" class="form-control" id="company Name" maxlength="50" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="company image">Şirkət Şəkli</label>
+        <input type="file" name="compImage" class="form-control" id="company image" required>
+      </div>
+      <p class="card-text mb-4 text-muted"><small>*Sadəcə qeydiyyatdan keçdiyiniz üçün bir pulsuz iş elanı əldə edəcəksiniz, lakin bazardan daha çoxunu əldə edə bilərsiniz.</small></p>
+      <button type="submit" class="btn btn-primary">Göndər</button>
+  </form>
+  </div>
+</div>

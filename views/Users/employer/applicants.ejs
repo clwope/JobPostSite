@@ -1,0 +1,18 @@
+<% layout("layouts/boilerplate") %>
+<div class="row d-flex">
+    <% for(let applicant of applicants){ let find = 0; %>
+    <div class="col-3">
+        <div class="card border-primary p-3 mb-3">
+            <div class="me-auto">
+            <h5 class="card-Title"><%=applicant.fullname%></h5>
+            <p class="card-text mb-1"><i class="bi bi-envelope-at"></i> <%=applicant.email%></p>
+            <p class="card-text mb-1"><i class="bi bi-person"></i> <%=applicant.age%></p>
+            <p class="card-text mb-1"><i class="bi bi-gender-ambiguous"></i> <%=applicant.gender%></p>
+            </div>
+            <div class="ms-auto">
+                <button class="btn btn-warning"><a class="nav-link" href="/employer/<%=employer._id%>/applicants/<%=job._id%>/CV/<%=applicant._id%>">CV-yə baxın</a></button>
+            </div>
+        </div>
+    </div>
+    <% find++ } %>
+</div>

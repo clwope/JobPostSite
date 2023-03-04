@@ -1,0 +1,102 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/public/styles.css">
+<div class="row">
+    <h2  class="text-center text-primary display-6 mb-3">Yeni Vakansiya Əlavə Edin</h2>
+    <hr class="col-8 offset-2 text-primary mx-auto">
+    <div class="d-flex mb-3">
+        <div class="col-4">
+            <select class="form-select form-select-lg w-50 ms-auto" form="Job" name="location">
+            <option selected hidden value="Bakı">Şəhər</option>
+            <% for(let city of cities){ %> 
+            <option value="<%=city.city%>"><%=city.city%></option>
+            <% } %> 
+            </select>
+        </div>    
+        <div class="col-4">
+            <select class="form-select form-select-lg w-50 m-auto" form="Job" name="position">
+            <option selected hidden value="Digər">Kategoriya</option>
+            <% for(let position of positions){ %> 
+            <option value="<%=position.position%>"><%=position.position%></option>
+            <% } %> 
+            </select>
+        </div>
+        <div class="col-4">
+            <select class="form-select form-select-lg w-50" form="Job" name="type">
+            <option selected value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            </select>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+        <div class="col-4">
+            <select class="form-select form-select-lg w-50 ms-auto" form="Job" name="education">
+            <option selected hidden value="Yoxdur">Təhsil</option>
+            <% for(let education of educations){ %> 
+            <option value="<%=education.education%>"><%=education.education%></option>
+            <% } %> 
+            </select>
+        </div>
+        <div class="col-4">
+            <select class="form-select form-select-lg w-50" form="Job" name="experience">
+                <option selected hidden value="Yoxtur">Təcrübə</option>
+                <% for(let experience of experiences){ %> 
+                <option value="<%=experience.experience%>"><%=experience.experience%></option>
+                <% } %> 
+            </select>
+        </div>
+    </div>
+    <div class="col-8 offset-2">
+        <form action="/new" method="post" enctype="multipart/form-data" id="Job" class="validated-form" novalidate>
+
+            <label for="position" class="form-label">Vəzifə</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="(Mühəndis, Sürücü...)" name="subPosition" id="position" maxlength="50" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+            </div>
+
+            <label for="pay" class="form-label">Əmək Haqqı</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="(600AZN, 600M-1000AZN, Razılaşma yolu ilə...)" name="pay" id="pay" maxlength="50" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+            </div>
+
+            <label for="phone" class="form-label">Əlaqə Nömrəsi</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="phone" id="phone" maxlength="50" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+            </div>
+
+            <label for="age" class="form-label">Yaş</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="(18-30, 30-50...)" name="age" id="age" maxlength="50" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+            </div>
+
+            <label for="gender" class="form-label">Cins</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="(Kişi, Qadın, Hər ikisi)" name="gender" id="gender" maxlength="50" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+            </div>
+
+            <label for="body" class="form-label">İş Barədə Məlumat</label>
+            <div class="input-group">
+                <textarea class="form-control" name="body" id="body" cols="8" rows="10" required></textarea>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+            </div>
+
+            <button class="btn btn-primary mt-2">Göndər</button>
+        </form>
+    </div>
+</div>

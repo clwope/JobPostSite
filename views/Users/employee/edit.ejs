@@ -1,0 +1,31 @@
+<% layout("layouts/boilerplate") %>
+<div class="row">
+    <div class="col-6 ofsset-3 m-auto">
+      <h2 class="display-5 text-primary text-center">İş axtaran Sahələrini Redaktə Edin</h2>
+      <hr class="text-primary">
+      <form action="/employee/<%=employee._id%>/edit?_method=PUT" method="post" enctype="multipart/form-data" class="validated-form" novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" value="<%=employee.email%>" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="age" class="form-label">Yaş</label>
+          <input type="text" name="age" class="form-control" id="age" value="<%=employee.age%>" maxlength="50" required>
+        </div>
+        <div class="mb-3">
+          <label for="gender" class="form-label">Cins</label>
+          <input type="text" name="gender" class="form-control" id="gender" value="<%=employee.gender%>" maxlength="50" required>
+        </div>
+        <div class="mb-3">
+          <label for="fullname" class="form-label">Tam Adı</label>
+          <input type="text" name="fullname" class="form-control" value="<%=employee.fullname%>" id="fullname" maxlength="50" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="cv">CV</label>
+            <input type="file" name="cv" class="form-control" id="cv">
+          </div>
+        <button type="submit" class="btn btn-primary">Göndər</button>
+        
+    </form>
+    </div>
+</div>

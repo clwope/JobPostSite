@@ -1,0 +1,77 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" crossorigin="">
+<link rel="stylesheet" href="custom.css">
+<div class="row mb-4">
+    <div class="col-12 mb-3 col-md-5 mb-md-0">
+        <div class="card bg-dark">
+            <img src="https://res.cloudinary.com/dszjzxwfv/image/upload/v1675981767/Project/career-occuaptions-recruitment-job-search-concept_ywipqi.jpg" class="card-img-top" crossorigin="">
+            <div class="card-body text-center">
+              <p class="card-text text-center text-white">Xəyal etdiyiniz işi dəqiqələr ərzində tapın!</p>
+              <button class="btn btn-info text-dark"><a href="/search" class="nav-link">İş Axtar</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-5 ms-auto">
+        <div class="card bg-dark">
+            <img src="https://res.cloudinary.com/dszjzxwfv/image/upload/v1675981992/Project/resume-7244898_640_wkfqkr.png" class="card-img-top" crossorigin="">
+            <div class="card-body text-center">
+              <p class="card-text text-center text-white">İşçi axtarırsınız? Elanınızı dərc edin!</p>
+              <button class="btn btn-warning"><a href="/employers" class="nav-link">Vakansiya</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<h2 class="text-center mb-4">Son iş elanları<i class="bi bi-fire" id="icon"></i></h2>
+<div class="row d-flex">
+    <% for(let job of topJobs){ %>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="card border-primary p-3 mb-3 text-center">
+            <h5 class="card-Title"><a class="nav-link" href="/show/<%=job._id%>"><%= job.subPosition %></a></h5>
+            <h6 class="card-title"><i class="bi bi-building"></i> <%=job.compName%></h6>
+            <p class="card-text text-danger mb-1"><i class="bi bi-cash-stack"></i> <%=job.pay%></p>
+            <p class="card-text">
+                <small class="text-muted"><i class="bi bi-geo-alt"></i> <%=job.location%></small>
+            </p>
+            <button class="btn btn-warning w-50 m-auto"><a class="nav-link" href="/show/<%=job._id%>">Ətraflı</a></button>
+        </div>
+    </div>
+    <% } %> 
+</div>
+<hr class="mt-4">
+<div class="row bg-primary flex-column flex-md-row p-5 mt-4 justify-content-lg-center"> <!--mx-auto p-5-->
+    <div class="col-12 mb-3 col-md-3 mb-lg-0">
+        <div class="card bg-light" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/dszjzxwfv/image/upload/v1676035633/Project/resume-application-employment-form-concept_wcgcxr.jpg" class="card-img-top" alt="..." crossorigin="">
+            <div class="card-body">
+              <h5 class="card-title">İş axtaran</h5>
+              <p class="card-text">Qeydiyyatdan keçib CV-nizi yüklədikdən sonra bir çox işlərdən axtarış edib istədiyinizi müraciət edə bilərsiniz! Sizə uğurlar arzulayırıq.</p>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-1 my-lg-auto">
+        <h1 class="ms-4 text-white"><i class="bi bi-arrow-right-square"></i></h1>
+    </div>
+    <div class="col-12 mb-3 col-md-3 mb-lg-0">
+        <div class="card bg-light" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/dszjzxwfv/image/upload/v1676034571/Project/resumes-desk_1_bp84za.jpg" class="card-img-top" alt="..." crossorigin="">
+            <div class="card-body">
+              <h5 class="card-title">İşəgötürən</h5>
+              <p class="card-text">
+                Keyfiyyətli işçilərə ehtiyacınız varsa; işəgötürən hesabınızı yarada, iş elanınızı yerləşdirə və müraciət edənlər arasından seçim edə bilərsiniz!</p>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-1 my-lg-auto">
+        <h1 class="ms-4 text-white"><i class="bi bi-arrow-right-square"></i></h1>
+    </div>
+    <div class="col-12 mb-3 col-md-3 mb-lg-0">
+        <div class="card bg-light" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/dszjzxwfv/image/upload/v1676035801/Project/3d-render-paper-clipboard-with-green-tick_p14wac.jpg" class="card-img-top" alt="..." crossorigin="">
+            <div class="card-body">
+              <h5 class="card-title">Bitdi!</h5>
+              <p class="card-text">Vəzifənizin nə olduğunun fərqi yoxdur. Project.com'da siz də sadə interfeys və asan addımlarla məqsədinizə nail ola bilərsiniz.</p>
+            </div>
+        </div>
+    </div>
+</div>

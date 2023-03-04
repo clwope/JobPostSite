@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/index">Project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <% if(user){ %>
+          <% if(user === "employer"){ %>
+            <div class="navbar-nav">
+              <a class="nav-link" href="/search">İş elanları</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+              <hr class="mb-1">
+              <a class="nav-link" href="/employer/<%=id%>">Admin</a>
+              <a class="nav-link" href="/login/comp">Login</a>
+              <a class="nav-link" href="/about">Haqqında</a>
+            </div>
+          <% } else if(user === "employee"){ %>
+            <div class="navbar-nav">
+              <a class="nav-link" href="/search">İş elanları</a>
+              <a class="nav-link" href="/login/emp">Login</a>
+              <a class="nav-link" href="/employee/<%=id%>">Admin</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+              <hr class="mb-1">
+              <a class="nav-link" href="/about">Haqqında</a>
+            </div>
+          <% } else{ %>
+            <div class="navbar-nav">
+              <a class="nav-link" href="/search">İş elanları</a>
+              <a class="nav-link" href="/login/emp">Login</a>
+              <a class="nav-link" href="/employee">İş axtaran</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+              <hr class="mb-1">
+              <a class="nav-link" href="/employers">İşəgötürənlər</a>
+              <a class="nav-link" href="/login/comp">Login</a>
+              <a class="nav-link" href="/about">Haqqında</a>
+            </div>
+          <% }%>
+        <% } else{ %>
+          <div class="navbar-nav">
+              <a class="nav-link" href="/search">İş elanları</a>
+              <a class="nav-link" href="/login/emp">Login</a>
+              <a class="nav-link" href="/employee">İş axtaran</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+              <hr class="mb-1">
+              <a class="nav-link" href="/employers">İşəgötürənlər</a>
+              <a class="nav-link" href="/login/comp">Login</a>
+              <a class="nav-link" href="/about">Haqqında</a>
+            </div>
+        <% } %>
+        </div>
+    </div>
+</nav>
