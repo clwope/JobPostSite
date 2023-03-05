@@ -1,7 +1,7 @@
 <% layout("layouts/boilerplate") %>
 <div class="row">
     <div class="col-6 offset-3">
-        <h1 class="display-5 text-primary text-center">İşəgötürən Kimi Daxil Olun</h1>
+        <h1 class="display-5 text-primary text-center">Login as Employer</h1>
         <hr class="text-primary">
         <form action="/login/comp" method="post" class="validated-form" novalidate>
             <div class="mb-3">
@@ -12,15 +12,15 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="password">Parol</label>
+                <label class="form-label" for="password">Password</label>
                 <input class="form-control" type="password" name="password" id="password" required>
                 <div class="valid-feedback">
                     Looks Good!
                 </div>
             </div>
             <div class="col-12 d-flex">
-                <button class="btn btn-primary me-auto">Daxil Ol</button>
-                <button class="btn btn-danger ms-auto"><a href="/pwchange" class="nav-link">Parolumu Unutdum</a></button>
+                <button class="btn btn-primary me-auto">Login</button>
+                <button class="btn btn-danger ms-auto"><a href="/pwchange" class="nav-link">Forgot my password</a></button>
             </div>
         </form>
     </div>

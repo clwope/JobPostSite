@@ -15,9 +15,9 @@
             <img src="data:application/octet-stream;base64,<%=image%>" class="card-img m-auto" style="width: 18rem;">
             <div class="card-body text-center">
                 <h5><%=employer.email%></h5>
-                <button class="btn btn-primary"><a class="nav-link" href="/employer/<%=employer._id%>/edit">Profili Redaktə Et</a></button>
+                <button class="btn btn-primary"><a class="nav-link" href="/employer/<%=employer._id%>/edit">Edit Profile</a></button>
                 <hr>
-                <h1 class="display-5 text-primary mb-3">Aktiv İş Elanları:</h1>
+                <h1 class="display-5 text-primary mb-3">Active Job Ads:</h1>
                 <div class="row mb-3">
                 <% for(job of employer.jobAds){ %>
                     <div class="col-12 col-lg-4 mb-3">
@@ -30,29 +30,24 @@
                                     <small class="text-muted"><%=job.location%></small>
                                 </p>
                                 <p class="card-text"><%=job.type%></p>
-                                <button class="btn btn-warning text-center"><a class="nav-link" href="/employer/<%=employer._id%>/applicants/<%=job._id%>">Müraciət Edənlərə Baxın</a></button>
+                                <button class="btn btn-warning text-center"><a class="nav-link" href="/employer/<%=employer._id%>/applicants/<%=job._id%>">Applicants</a></button>
                             </div>
                         </div>
                     </div>
                 <% find++} %>
                 </div>
-                <small class="text-muted">*İş elanları 30 gündən sonra avtomatik olaraq silinir.</small>
-                <h4>Tapınan: <%= find %> </h4>
-                <button class="btn btn-primary text-center"><a href="/new" class="nav-link">Vakansiya</a></button>
+                <h4>Found: <%= find %> </h4>
+                <button class="btn btn-primary text-center"><a href="/new" class="nav-link">New Job</a></button>
                 <hr>
-                <ul class="list-inline mt-4">
-                    <li class="list-inline-item"><blockquote class="blockquote d-inline">&bull; Qalan İş Elanı Haqqları: <%=employer.right%></blockquote></li>
-                    <li class="list-inline-item"><button class="btn btn-warning"><a href="/employer/<%=employer._id%>/market" class="nav-link">Daha çox haqq alın!</a></button></li>
-                </ul>
             </div>
             <div class="mx-auto mb-4" id='map' style='width: 400px; height: 300px;'></div>
             <% if(!employer.verified){ %>
             <form  action="/verify/<%=employer._id%>" method="post" class="mx-auto mb-3">
-                <label for="email" class="form-label">E-poçtunuzu doğrulayın: <%=employer.email%></label>
-                <button class="btn btn-warning ms-2 text-white">Doğrula</button>
+                <label for="email" class="form-label">Verify your email: <%=employer.email%></label>
+                <button class="btn btn-warning ms-2 text-white">Verify</button>
             </form>
             <% } else{ %>
-                <label for="email" class="form-label mx-auto mb-3">Doğrulanmış e-poçt: <%=employer.email%> <i class="bi bi-check2-circle text-success"></i></label>
+                <label for="email" class="form-label mx-auto mb-3">Verified email: <%=employer.email%> <i class="bi bi-check2-circle text-success"></i></label>
             <% } %>
         </div>
     </div>

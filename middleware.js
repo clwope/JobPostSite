@@ -60,7 +60,7 @@ module.exports.isLogged = (req, res, next) => {
     next();
   }
   else{
-    req.flash("error", "Daxil olmalısınız");
+    req.flash("error", "You should login");
     res.redirect("/index");
   }
 }
@@ -71,7 +71,7 @@ module.exports.isAuthEmployee = catchAsync(async (req, res, next) => {
     next();
   }
   else{
-    req.flash("error", "Bunun üçün icazəniz yoxdur!");
+    req.flash("error", "You don't have permission for this action");
     res.redirect("/index");
   }
 })
@@ -82,7 +82,7 @@ module.exports.isAuthEmployer = catchAsync(async (req, res, next) => {
     next();
   }
   else{
-    req.flash("error", "Bunun üçün icazəniz yoxdur!");
+    req.flash("error", "You don't have permission for this action");
     res.redirect("/index");
   }
 })
@@ -92,7 +92,7 @@ module.exports.isVerifiedEmployee = catchAsync(async (req, res, next) => {
   if(employee.verified){
     next();
   }else{
-    req.flash("error", "E-poçtunuzu doğrulayın");
+    req.flash("error", "Confirm your email account");
     res.redirect(`/employee/${req.session.user_id}`);
   }
 })
@@ -102,7 +102,7 @@ module.exports.isVerifiedEmployer = catchAsync(async (req, res, next) => {
   if(employer.verified){
     next();
   }else{
-    req.flash("error", "E-poçtunuzu doğrulayın");
+    req.flash("error", "Confirm your email account");
     res.redirect(`/employer/${req.session.user_id}`);
   }
 })

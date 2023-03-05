@@ -1,7 +1,7 @@
 <% layout("layouts/boilerplate") %>
 <div class="row">
     <div class="col-6 ofsset-3 m-auto">
-      <h2 class="display-5 text-primary text-center">İşəgötürən Sahələrini Redaktə Edin</h2>
+      <h2 class="display-5 text-primary text-center">Edit Employer</h2>
       <hr class="text-primary">
       <form action="/employer/<%=employer._id%>/edit?_method=PUT" method="post" enctype="multipart/form-data" class="validated-form" novalidate>
         <div class="mb-3">
@@ -9,19 +9,18 @@
           <input type="email" name="email" class="form-control" value="<%=employer.email%>" id="email" required>
         </div>
         <div class="mb-3">
-          <label for="location" class="form-label">Mövqe</label>
+          <label for="location" class="form-label">Location</label>
           <input type="text" name="location" class="form-control" value="<%=employer.location%>" id="location" required>
         </div>
         <div class="mb-3">
-          <label for="company Name" class="form-label">Şirkət Adı</label>
+          <label for="company Name" class="form-label">Company Name</label>
           <input type="text" name="compName" class="form-control" value="<%=employer.compName%>" id="company Name" maxlength="50" required>
         </div>
         <div class="mb-3">
-          <label class="form-label" for="company image">Şirkət Şəkli</label>
+          <label class="form-label" for="company image">Company Image</label>
           <input type="file" name="compImage" class="form-control" id="company image">
         </div>
-        <p class="card-text mb-4 text-muted text-danger"><small>*Bütün iş elanlarınız son tarixə çatana qədər şirkət şəklinizi dəyişməyin. Bu, xətaya səbəb olacaq və iş elanlarınız görünməyəcək.</small></p>
-        <button type="submit" class="btn btn-primary">Göndər</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
 </div>

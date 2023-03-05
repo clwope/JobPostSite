@@ -17,7 +17,7 @@ sendEmail = (email, subject, text) => {
     },
   });
 
-  ejs.renderFile(path.resolve("./views/verify.ejs"), { email, text }, (err, data) => { //test
+  ejs.renderFile(path.resolve("./views/verify.ejs"), { email, text }, (err, data) => {
     if (err) {
       throw new ExpressError("An error occured", 400);
     } else {

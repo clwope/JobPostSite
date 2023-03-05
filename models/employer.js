@@ -5,7 +5,6 @@ let employerSchema = new mongoose.Schema({
     email: { type: String, required: true},
     location: { type: String, required: true},
     password: { type: String, required: true},
-    right: { type: Number },
     compImage: {location: {type: String, required: true}, key: {type: String, required: true}},
     geometry: { type: { type: String, enum: ['Point'], required: true }, coordinates: {type: [Number], required: true } },
     verified: { type: Boolean, required: true, default: false },

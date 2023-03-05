@@ -3,5 +3,5 @@ module.exports = [
     {experience: "1-3"},
     {experience: "3-5"},
     {experience: "5+"},
-    {experience: "Yoxdur"}
+    {experience: "No Experience"}
 ]

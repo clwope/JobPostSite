@@ -19,7 +19,6 @@ let cities = require("./utils/city");
 let positions = require("./utils/position");
 let educations = require("./utils/education");
 let experiences = require("./utils/experience");
-let ExpressError = require("./utils/ExpressError");
 let catchAsync = require("./utils/catchAsync");
 let { validateJob, validateEmployer, isLogged, validateEmployee, isAuthEmployee, isAuthEmployer, validateEmployerEdit, validateEmployeeEdit, isVerifiedEmployee, isVerifiedEmployer } = require("./middleware");
 let flash = require("connect-flash");
@@ -53,15 +52,14 @@ app.use(mongoSanitize());
 const sessionConfig = {
     store: MongoStore.create({
         mongoUrl: process.env.DB_URL,
-        secret: "1803TissDurdenProject7",
+        secret: "yoursecret",
         touchAfter: 24*3600
     }),
-    secret: "1803TissDurdenProject7",
+    secret: "yoursecret",
     resave: false,
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      //secure: true,
       expires: Date.now() + 1000 * 60  * 60 * 24 * 7,
       maxAge: 1000 * 60  * 60 * 24 * 7
     }
@@ -112,7 +110,7 @@ app.get("/new", isLogged, isVerifiedEmployer, catchAsync(async (req, res) => {
         res.render("Jobs/new", { positions, cities, educations, experiences });
     }
     else{
-        req.flash("error", "Bunu etmək üçün icazəniz yoxdur!");
+        req.flash("error", "You don't have permission for this action");
         res.redirect("/index");
     }
 }))
@@ -148,29 +146,29 @@ app.post("/search", catchAsync(async (req, res) => {
     if(location === undefined && position === undefined){
         if(education === undefined){
             if(experience === undefined){
-                let loc = "Hamısı";
-                let pos = "Hamısı";
-                let ed = "Hamısı";
-                let exp = "Hamısı";
+                let loc = "All";
+                let pos = "All";
+                let ed = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}} ).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let loc = "Hamısı";
-                let pos = "Hamısı";
-                let ed = "Hamısı";
+                let loc = "All";
+                let pos = "All";
+                let ed = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, experience: experience} ).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }
         }else{
             if(experience === undefined){
-                let loc = "Hamısı";
-                let pos = "Hamısı";
-                let exp = "Hamısı";
+                let loc = "All";
+                let pos = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, education: education} ).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let loc = "Hamısı";
-                let pos = "Hamısı";
+                let loc = "All";
+                let pos = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, education: education, experience: experience} ).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }
@@ -178,25 +176,25 @@ app.post("/search", catchAsync(async (req, res) => {
     }else if(location === undefined){
         if(education === undefined){
             if(experience === undefined){
-                let loc = "Hamısı";
-                let ed = "Hamısı";
-                let exp = "Hamısı";
+                let loc = "All";
+                let ed = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, position: position}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let loc = "Hamısı";
-                let ed = "Hamısı";
+                let loc = "All";
+                let ed = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, position: position, experience: experience}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }
         }else{
             if(experience === undefined){
-                let loc = "Hamısı";
-                let exp = "Hamısı";
+                let loc = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, position: position, education: education}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let loc = "Hamısı";
+                let loc = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, position: position, education: education, experience: experience}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }  
@@ -204,25 +202,25 @@ app.post("/search", catchAsync(async (req, res) => {
     }else if(position === undefined){
         if(education === undefined){
             if(experience === undefined){
-                let pos = "Hamısı";
-                let ed = "Hamısı";
-                let exp = "Hamısı";
+                let pos = "All";
+                let ed = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let pos = "Hamısı";
-                let ed = "Hamısı";
+                let pos = "All";
+                let ed = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location, experience: experience}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }
         }else{
             if(experience === undefined){
-                let pos = "Hamısı";
-                let exp = "Hamısı";
+                let pos = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location, education: education}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let pos = "Hamısı";
+                let pos = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location, education: education, experience: experience}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }
@@ -231,18 +229,18 @@ app.post("/search", catchAsync(async (req, res) => {
     }else{
         if(education === undefined){
             if(experience === undefined){
-                let ed = "Hamısı";
-                let exp = "Hamısı";
+                let ed = "All";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location, position: position}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
-                let ed = "Hamısı";
+                let ed = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location, position: position, experience: experience}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }
         }else{
             if(experience === undefined){
-                let exp = "Hamısı";
+                let exp = "All";
                 let foundJobs = await Job.find( {type: {$in: time}, location: location, position: position, education: education}).sort( { createdAt: -1} );
                 return res.render("Jobs/list", { foundJobs, positions, cities, pf, loc, pos, ed, exp });
             }else{
@@ -258,10 +256,6 @@ app.post("/new", isLogged, isVerifiedEmployer,  upload.array("compImage"), valid
     let isEmployer = await Employer.findById(req.session.user_id);
     if(isEmployer){
         let user = await Employer.findById(req.session.user_id);
-        if(user.right === 0){
-            req.flash("error", "0 elan haqqınız var");
-            return res.redirect(`employer/${user._id}`);
-        }
         let job = new Job(req.body);
         job.views = 0;
         job.geometry = user.geometry;
@@ -274,14 +268,13 @@ app.post("/new", isLogged, isVerifiedEmployer,  upload.array("compImage"), valid
         let time = `${day}.${month}.${year}`;
         job.time = time;
         user.jobAds.push(job);
-        user.right--;
         await job.save();
         await user.save();
-        req.flash("success", "Yeni iş elanı əlavə edildi!");
+        req.flash("success", "New job ad added");
         res.redirect(`/show/${job._id}`);
     }
     else{
-        req.flash("error", "Bunu etmək üçün icazəniz yoxdur!");
+        req.flash("error", "You don't have permission for this action");
         res.redirect("/index");
     }
     
@@ -290,24 +283,24 @@ app.post("/new", isLogged, isVerifiedEmployer,  upload.array("compImage"), valid
 app.post("/employers", upload.single("compImage"), validateEmployer, catchAsync(async (req, res) => {
     let isExistEmployer = await Employer.findOne({compName: req.body.compName});
     if(isExistEmployer){
-        req.flash("error", "Şirkət adı mövcuddur");
+        req.flash("error", "Company name already exist");
         return res.redirect("/employers");
     }
 
     let isExistEmail = await Employer.findOne({email: req.body.email});
     if(isExistEmail){
-        req.flash("error", "İstifadə e-poçt");
+        req.flash("error", "Used email");
         return res.redirect("/employers");
     }
 
     let file = req.file;
     if( file.mimetype !== ('image/jpeg' || 'image/jpg' || 'image/png') ){
-        req.flash("error", "Şəkil növü jpeg, jpg və ya png olmalıdır");
+        req.flash("error", "Image type should be jpg, jpeg or png");
         return res.redirect("/employers");
     }
 
     if(req.body.password.length < 6){
-        req.flash("error", "Parol minimum 6 simvoldan ibarət olmalıdır!");
+        req.flash("error", "Password should be minimum 6 letters long");
         return res.redirect("/employers");
     }
 
@@ -319,8 +312,6 @@ app.post("/employers", upload.single("compImage"), validateEmployer, catchAsync(
     employer.compImage.location = result.Location;
     employer.compImage.key = result.Key;
 
-    employer.right = 1;
-
     employer.password = hashedPassword;
 
     let geoData = await geocoder.forwardGeocode({query: req.body.location,limit: 1}).send();
@@ -330,7 +321,7 @@ app.post("/employers", upload.single("compImage"), validateEmployer, catchAsync(
     req.session.user_id = employer._id;
     req.session.user_role = "employer";
 
-    req.flash("success", "Hesabınız yaradıldı! Xoş gəldiniz :)");
+    req.flash("success", "Created a new account! Welcome :)");
     res.redirect(`/employer/${employer._id}`);
 }))
 
@@ -339,36 +330,36 @@ app.post("/login/comp", catchAsync(async (req, res) => {
     let pw = req.body.password;
     let employer = await Employer.findOne({email: email});
     if(!employer){
-        req.flash("error", "Hesab tapılmadı");
+        req.flash("error", "No account");
         return res.redirect("/login/comp");
     }
     let compare = await bcrypt.compare(pw, employer.password);
     if(!compare){
-        req.flash("error", "Hesab tapılmadı");
+        req.flash("error", "No account");
         return res.redirect("/login/comp");
     }
     req.session.user_id = employer._id;
     req.session.user_role = "employer";
 
-    req.flash("success", "Xoş gəldiniz!");
+    req.flash("success", "Welcome!");
     res.redirect(`/employer/${employer._id}`);
 }))
 
 app.post("/employee", upload.single("cv"), validateEmployee, catchAsync(async(req, res) => {
     let isExistEmployee = await Employee.findOne({email: req.body.email});
     if(isExistEmployee){
-        req.flash("error", "İstifadə e-poçt");
+        req.flash("error", "Used email");
         return res.redirect("/employee");
     }
 
     let file = req.file;
     if( file.mimetype !== 'application/pdf' ){
-        req.flash("error", "Fayl növü pdf olmalıdır");
+        req.flash("error", "File type should be pdf");
         return res.redirect("/employee");
     }
 
     if(req.body.password.length < 6){
-        req.flash("error", "Parol minimum 6 simvoldan ibarət olmalıdır!");
+        req.flash("error", "Password should be minimum 6 letters long");
         return res.redirect("/employee");
     }
 
@@ -385,7 +376,7 @@ app.post("/employee", upload.single("cv"), validateEmployee, catchAsync(async(re
     req.session.user_id = employee._id;
     req.session.user_role = "employee";
 
-    req.flash("success", "Hesabınız yaradıldı! Xoş gəldiniz :)");
+    req.flash("success", "Created a new account! Welcome");
     res.redirect(`/employee/${employee._id}`);
 }))
 
@@ -394,18 +385,18 @@ app.post("/login/emp", catchAsync(async(req, res) => {
     let pw = req.body.password;
     let employee = await Employee.findOne({email: email});
     if(!employee){
-        req.flash("error", "Hesab tapılmadı");
+        req.flash("error", "No account");
         return res.redirect("/login/comp");
     }
     let compare = await bcrypt.compare(pw, employee.password);
     if(!compare){
-        req.flash("error", "Hesab tapılmadı");
+        req.flash("error", "No account");
         return res.redirect("/login/emp");
     }
     req.session.user_id = employee._id;
     req.session.user_role = "employee";
 
-    req.flash("success", "Xoş gəldiniz!");
+    req.flash("success", "Welcome");
     res.redirect(`/employee/${employee._id}`);
 }))
 
@@ -417,7 +408,7 @@ app.post("/logout", (req, res) => {
 
 app.post("/pwchange", catchAsync(async (req, res) => {
     if(req.body.password.length < 6){
-        req.flash("error", "Parol minimum 6 simvoldan ibarət olmalıdır!");
+        req.flash("error", "Password should be minimum 6 letters long");
         return res.redirect("/pwchange");
     }
 
@@ -436,7 +427,7 @@ app.post("/pwchange", catchAsync(async (req, res) => {
         const message = `${process.env.BASE_URL}/pwchange/${employee._id}/${token.token}/${password}`;
         await sendEmailPw(employee.email, `Change Password ${employee.fullname}`, message);
     
-        req.flash("success","Hesabınıza e-poçt göndərildi!");
+        req.flash("success","An email sent to your account");
         return res.redirect("/login/emp");
     }
     else if(employer){
@@ -449,7 +440,7 @@ app.post("/pwchange", catchAsync(async (req, res) => {
         const message = `${process.env.BASE_URL}/pwchange/${employer._id}/${token.token}/${password}`;
         await sendEmailPw(employer.email, `Change Password ${employer.compName}`, message);
     
-        req.flash("success","Hesabınıza e-poçt göndərildi!");
+        req.flash("success","An email sent to your account");
         return res.redirect("/login/comp");
     }
     else{
@@ -466,14 +457,14 @@ app.post("/sendCV/:id", isLogged, isVerifiedEmployee, catchAsync(async (req, res
 
     let find = job.EmployeeId.includes(empid);
     if(find){
-        req.flash("error","Siz bu iş üçün müraciət etmisiniz!");
+        req.flash("error","You have already submitted for this job!");
         return res.redirect(`/show/${jobid}`);
     }
 
     job.EmployeeId.push(employee);
     await job.save();
 
-    req.flash("success", "CV-nizi göndərdiniz!");
+    req.flash("success", "Sent your CV");
     res.redirect(`/show/${jobid}`);
 }))
 
@@ -493,11 +484,11 @@ app.post("/verify/:id", isLogged, catchAsync( async(req, res) => {
             const message = `${process.env.BASE_URL}/verify/${id}/${token.token}`;
             await sendEmail(employee.email, `Verify Email ${employee.fullname}`, message);
         
-            req.flash("success","Hesabınıza e-poçt göndərildi!");
+            req.flash("success","An email sent to your account");
             return res.redirect(`/employee/${id}`);
         }
         else{
-            req.flash("error","Bunu etmək üçün icazəniz yoxdur");
+            req.flash("error","You don't have permission for this action");
             return res.redirect("/index");
         }
     }
@@ -512,11 +503,11 @@ app.post("/verify/:id", isLogged, catchAsync( async(req, res) => {
             const message = `${process.env.BASE_URL}/verify/${id}/${token.token}`;
             await sendEmail(employer.email, `Verify Email ${employer.compName}`, message);
         
-            req.flash("success","Hesabınıza e-poçt göndərildi!");
+            req.flash("success","An email sent to your account");
             return res.redirect(`/employer/${id}`);
         }
         else{
-            req.flash("error","Bunu etmək üçün icazəniz yoxdur");
+            req.flash("error","You don't have permission for this action");
             return res.redirect("/index");
         }
     }
@@ -564,7 +555,7 @@ app.put("/employee/:id/edit", isLogged, isAuthEmployee, upload.single("cv"), val
     if(!isEmptyEmail){
         let isExistEmail = await Employee.findOne({email: req.body.email});
         if(isExistEmail){
-            req.flash("error", "İstifadə e-poçt");
+            req.flash("error", "Used email");
             return res.redirect(`/employee/${req.params.id}/edit`);
         }
     }
@@ -572,7 +563,7 @@ app.put("/employee/:id/edit", isLogged, isAuthEmployee, upload.single("cv"), val
     let file = req.file;
     if(file){
         if( file.mimetype !== 'application/pdf' ){
-            req.flash("error", "Fayl növü pdf olmalıdır");
+            req.flash("error", "File type should be pdf");
             return res.redirect(`/employee/${req.params.id}/edit`);
         }
         await s3DeletePDF(foundEmployee.cv);
@@ -584,7 +575,7 @@ app.put("/employee/:id/edit", isLogged, isAuthEmployee, upload.single("cv"), val
 
     await Employee.findByIdAndUpdate(req.params.id, req.body);
 
-    req.flash("success", "Hesabınız yeniləndi!");
+    req.flash("success", "Succesfully edited your account");
     res.redirect(`/employee/${req.params.id}`);
 }))
 
@@ -601,7 +592,7 @@ app.put("/employer/:id/edit", isLogged, isAuthEmployer, upload.single("compImage
     if(!isEmptyEmail){
         let isExistEmail = await Employer.findOne({email: req.body.email});
         if(isExistEmail){
-            req.flash("error", "İstifade e-poçt");
+            req.flash("error", "Used email");
             return res.redirect(`/employer/${req.params.id}/edit`);
         }
     }
@@ -610,7 +601,7 @@ app.put("/employer/:id/edit", isLogged, isAuthEmployer, upload.single("compImage
     if(!isEmptyEmployer){
         let isExistEmployer = await Employer.findOne({compName: req.body.compName});
         if(isExistEmployer){
-            req.flash("error", "Şirkət adı mövcuddur");
+            req.flash("error", "Company name already exist");
             return res.redirect(`/employer/${req.params.id}/edit`);
         }
     }
@@ -618,7 +609,7 @@ app.put("/employer/:id/edit", isLogged, isAuthEmployer, upload.single("compImage
     let file = req.file;
     if(file){
         if( file.mimetype !== ('image/jpeg' || 'image/jpg' || 'image/png') ){
-            req.flash("error", "Şəkil növü jpeg, jpg və ya png olmalıdır");
+            req.flash("error", "Image type should be jpg, jpeg or png");
             return res.redirect(`/employer/${req.params.id}/edit`);
         }
         await s3DeleteImage(foundEmployer.compImage);
@@ -634,40 +625,8 @@ app.put("/employer/:id/edit", isLogged, isAuthEmployer, upload.single("compImage
 
     await Employer.findByIdAndUpdate(req.params.id, req.body);
 
-    req.flash("success", "Hesabınız yeniləndi!");
+    req.flash("success", "Successfully edited your account");
     res.redirect(`/employer/${req.params.id}`);
-}))
-
-app.get("/employer/:id/market", isLogged, isVerifiedEmployer, isAuthEmployer, catchAsync(async (req, res) => {
-    let employer = await Employer.findById(req.params.id);
-    res.render("Users/employer/market", { employer });
-}))
-
-app.post("/employer/:id/market", isLogged, isVerifiedEmployer, isAuthEmployer, catchAsync(async (req, res) => {
-    const shopArray = ["1", "3", "5"];
-    let { shop } = req.body;
-    let employer = await Employer.findById(req.params.id);
-    if(shopArray.includes(shop)){
-        switch (shop) {
-            case "1":
-                employer.right = employer.right + 1;
-                break;
-            case "3":
-                employer.right = employer.right + 3;
-                break;
-            case "5":
-                employer.right = employer.right + 5;
-                break;   
-        }
-        await employer.save();
-        req.flash("success", "Daha çox iş elanı haqqı satın alındı!");
-        res.redirect(`/employer/${employer._id}`);
-    }
-    else{
-        req.flash("error","An error occured");
-        res.redirect(`/employer/${employer._id}`);
-    }
-    
 }))
 
 app.get("/verify/:id/:token", isLogged, catchAsync(async (req, res) => {
@@ -685,11 +644,11 @@ app.get("/verify/:id/:token", isLogged, catchAsync(async (req, res) => {
         if(req.session.user_id === id){
             await Employee.findByIdAndUpdate(id, {verified: true} );
             await Token.findByIdAndRemove(foundToken._id);
-            req.flash("success","E-poçtunuz təsdiqləndi!");
+            req.flash("success","Email verified!");
             res.redirect(`/employee/${id}`);
         }
         else{
-            req.flash("error","Bunu etmək üçün icazəniz yoxdur");
+            req.flash("error","You don't have permission for this action");
             return res.redirect("/index");
         }
     }
@@ -698,11 +657,11 @@ app.get("/verify/:id/:token", isLogged, catchAsync(async (req, res) => {
         if(req.session.user_id === id){
             await Employer.findByIdAndUpdate(id, {verified: true} );
             await Token.findByIdAndRemove(foundToken._id);
-            req.flash("success","E-poçtunuz təsdiqləndi!");
+            req.flash("success","Email verified");
             return res.redirect(`/employer/${id}`);
         }
         else{
-            req.flash("error","Bunu etmək üçün icazəniz yoxdur");
+            req.flash("error","You don't have permission for this action");
             return res.redirect("/index");
         }
     }
@@ -733,7 +692,7 @@ app.get("/pwchange/:id/:token/:password", catchAsync(async (req, res) => {
         let salt = await bcrypt.genSalt(12);
         let hashedPassword = await bcrypt.hash(password, salt);
         await Employee.findByIdAndUpdate(id, {password: hashedPassword});
-        req.flash("success", "Parol dəyişdi");
+        req.flash("success", "Password changed");
         return res.redirect("/login/emp");
     }
     else if(employer){
@@ -741,7 +700,7 @@ app.get("/pwchange/:id/:token/:password", catchAsync(async (req, res) => {
         let salt = await bcrypt.genSalt(12);
         let hashedPassword = await bcrypt.hash(password, salt);
         await Employer.findByIdAndUpdate(id, {password: hashedPassword});
-        req.flash("success", "Parol dəyişdi");
+        req.flash("success", "Password changed");
         return res.redirect("/login/comp");
     }
     else{

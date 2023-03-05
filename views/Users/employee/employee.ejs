@@ -13,18 +13,18 @@
                     <li><%=employee.email%></li>
                     <li><%=employee.gender%></li>
                     <li class="mb-2"><%=employee.age%></li>
-                <button class="btn btn-primary"><a class="nav-link" href="/employee/<%=employee._id%>/edit">Profili Redaktə Et</a></button>
+                <button class="btn btn-primary"><a class="nav-link" href="/employee/<%=employee._id%>/edit">Edit Profile</a></button>
                 <hr>
                 <iframe src="data:application/pdf;base64,<%=pdf%>" width="100%" height="800px"></iframe>
-                <button class="btn btn-primary text-center"><a href="/search" class="nav-link">İş Axtar!</a></button>
+                <button class="btn btn-primary text-center"><a href="/search" class="nav-link">Find Job!</a></button>
             </div>
             <% if(!employee.verified){ %>
             <form  action="/verify/<%=employee._id%>" method="post" class="mx-auto mb-3">
-                <label for="email" class="form-label">E-poçtunuzu doğrulayın: <%=employee.email%></label>
-                <button class="btn btn-warning ms-2 text-white">Doğrula</button>
+                <label for="email" class="form-label">Verify your email: <%=employee.email%></label>
+                <button class="btn btn-warning ms-2 text-white">Verify</button>
             </form>
             <% } else{ %>
-                <label for="email" class="form-label mx-auto mb-3">Doğrulanmış e-poçt: <%=employee.email%> <i class="bi bi-check2-circle text-success"></i></label>
+                <label for="email" class="form-label mx-auto mb-3">Verify email: <%=employee.email%> <i class="bi bi-check2-circle text-success"></i></label>
             <% } %>
         </div>
     </div>

@@ -3,7 +3,7 @@
 <div class="row mb-4">
         <div class="col-6">
             <select class="form-select form-select-lg w-50 ms-auto" form="JobTitle" name="location">
-            <option disabled selected hidden>Şəhər</option>
+            <option disabled selected hidden>City</option>
             <% for(let city of cities){ %> 
             <option value="<%=city.city%>"><%=city.city%></option>
             <% } %> 
@@ -11,7 +11,7 @@
         </div>    
         <div class="col-6">
             <select class="form-select form-select-lg w-50 me-auto" form="JobTitle" name="position">
-            <option disabled selected hidden >Kategoriya</option>
+            <option disabled selected hidden >Category</option>
             <% for(let position of positions){ %> 
             <option value="<%=position.position%>"><%=position.position%></option>
             <% } %> 
@@ -19,7 +19,7 @@
         </div>
         <div class="col-6 mt-3">
             <select class="form-select form-select-lg w-50 ms-auto" form="JobTitle" name="education">
-            <option disabled selected hidden >Təhsil</option>
+            <option disabled selected hidden >Education</option>
             <% for(let education of educations){ %> 
             <option value="<%=education.education%>"><%=education.education%></option>
             <% } %> 
@@ -27,7 +27,7 @@
         </div>
         <div class="col-6 mt-3">
             <select class="form-select form-select-lg w-50 me-auto" form="JobTitle" name="experience">
-            <option disabled selected hidden >Təcrübə</option>
+            <option disabled selected hidden >Experience</option>
             <% for(let experience of experiences){ %> 
             <option value="<%=experience.experience%>"><%=experience.experience%></option>
             <% } %> 
@@ -46,7 +46,7 @@
             </div>
         </div>
         <form action="/search" class="text-center mt-4" id="JobTitle" method="post">
-        <button type="submit" id="cmon" class="btn btn-success">Göndər</button>
+        <button type="submit" id="cmon" class="btn btn-success">Submit</button>
         </form>
 </div>
 <hr class="w-50 m-auto mb-4">
@@ -61,7 +61,7 @@
                 <small class="text-muted"><i class="bi bi-geo-alt"></i> <%=job.location%></small>
             </p>
             <p class="card-text"><%=job.time%></p>
-            <button class="btn btn-warning w-50 m-auto"><a class="nav-link" href="/show/<%=job._id%>">Ətraflı</a></button>
+            <button class="btn btn-warning w-50 m-auto"><a class="nav-link" href="/show/<%=job._id%>">See</a></button>
         </div>
     </div>
     <% } %> 
